@@ -26,6 +26,8 @@ float resultats [3][10] ;
    float execDyn=0;
    int k=0;
 
+
+
    // test pour la merthode rec 
     for(int k=0 ; k<10 ;k++ ){
           struct timeval stop, start;
@@ -35,8 +37,8 @@ float resultats [3][10] ;
          // appel de la fonction recursive
          int r = recursive((k+1)*10, searched_value);
          resultats[0][k]=(double)(k+1)*10;
-          execRec =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
-          printf("Duration Rec MS %'.3f\n",execRec );
+        //  execRec =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
+        //  printf("Duration Rec MS %'.3f\n",execRec );
          resultats[1][k]=execRec;      
     }
 
@@ -62,8 +64,8 @@ float resultats [3][10] ;
 //           execDyn =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
 //           resultats[2][k]=execDyn;
 //     }
-   
-    
+
+
       // print results table 
  printf("\n");
      for( k=0 ;k<10 ;k++ ){

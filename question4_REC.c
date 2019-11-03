@@ -24,6 +24,8 @@ int nb_sol = 0 ;
 
 int sub_sum_set(int n,int sum){
     
+
+    printf("=======================");
 int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
                   3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
                   3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
@@ -48,14 +50,8 @@ int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
                     smallest_sol_len = count ;
                     smallest_sol_index = nb_sol ; // active solution
                 }
-
-
             nb_sol++;
-
-
         return true ;//need a push here
-
-
     }
     if(sum<0){
         return false ;
@@ -89,6 +85,11 @@ int recursive(int len ,int searched_value)
 for (int l=0;l<100;l++){
     path[l]=0;
 }
+
+// initialiser All_solutions
+
+
+
 int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
                   3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
                   3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
@@ -96,14 +97,11 @@ int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
 
 int max_sol =len;
 int max = len-1 ;
-nb_sol = 0 ;
+ nb_sol = 0 ;
 
- 
 
-  
-
-    for(int i =0;i<max_sol;i++){
-        for(int j=0;j<=max;j++){
+    for(int i =0;i<100;i++){
+        for(int j=0;j<=100;j++){
 
             all_solutions[i][j] = 0 ;
         }
@@ -118,6 +116,7 @@ nb_sol = 0 ;
             for(int y=0;y<nb_sol;y++){
 
                 for(int i=0;i<=max ;i++){
+                    printf("===> %d  \n" ,all_solutions[y][i]);
                 if(all_solutions[y][i]){
                         printf("+ %d",donnees[i]);
                     }
@@ -133,13 +132,18 @@ nb_sol = 0 ;
                         printf("+ %d",donnees[t]);
                     }
                 }
+                printf("I am here");
+
                  printf(" = %d \n",searched_value);
+                 
 
 
     }
     else{
         printf("la valeur n'est pas trouve \n");
     }
+
+    
     return 0;
 }
 
