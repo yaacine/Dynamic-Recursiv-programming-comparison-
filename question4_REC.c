@@ -3,39 +3,40 @@
 #define true 1
 #define false 0
 
-#define max_sol 10
-
-#define len 9
-
-int max = len-1 ;
 
 
-int nb_sol = 0 ;
-
-int all_solutions [max_sol][len] ; // store 10 solutions max in a set of len elements
-
- int searched_value = 90 ;
-
-int tab[] = {3,5,6,8,7,2,4,59,69};
-int path[] = {0,0,0,0,0,0,0,0,0};
 
 int smallest_sol_index = -1 ;
 int smallest_sol_len = -1 ;
 
-//int solution[] = {0,0,0,0,0,0};
+int all_solutions [100][100] ; // store 10 solutions max in a set of len elements
+int nb_sol = 0 ;
 
-
-//keep 10 solutions max
-
+  int path[] = {0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,};
 
 int sub_sum_set(int n,int sum){
+    
+int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,};
 
+      
+  
 
     if((sum==0)){
 
             int count =0 ;
 
-            for(int i=0;i<=max;i++){
+            for(int i=0;i<=n;i++){
                // solution[i]=path[i];
                 all_solutions[nb_sol][i]=path[i];
                 // count nb elements involved
@@ -67,7 +68,7 @@ int sub_sum_set(int n,int sum){
             int var1,var2; //separer permet de g�nerer tout les cas
 
             path[n]=1;
-        var1=sub_sum_set(n-1,sum-tab[n]);
+        var1=sub_sum_set(n-1,sum-donnees[n]);
                 path[n]=0;
             var2=sub_sum_set(n-1, sum);
 
@@ -80,9 +81,26 @@ int sub_sum_set(int n,int sum){
 
 
 
-int main()
+int recursive(int len ,int searched_value)
 {
 
+
+//initialiser path à chaque appel
+for (int l=0;l<100;l++){
+    path[l]=0;
+}
+int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,};
+
+int max_sol =len;
+int max = len-1 ;
+nb_sol = 0 ;
+
+ 
+
+  
 
     for(int i =0;i<max_sol;i++){
         for(int j=0;j<=max;j++){
@@ -93,14 +111,15 @@ int main()
 
     int bool = sub_sum_set(max,searched_value);
 
-    printf("\n test : last element in tab* %d * \n",tab[5]);
+    printf("\n test : last element in donnees* %d * \n",donnees[5]);
 
     if(bool){
         printf("la valeur est trouve \n");
             for(int y=0;y<nb_sol;y++){
+
                 for(int i=0;i<=max ;i++){
                 if(all_solutions[y][i]){
-                        printf("+ %d",tab[i]);
+                        printf("+ %d",donnees[i]);
                     }
                 }
                     printf(" = %d \n",searched_value);
@@ -111,7 +130,7 @@ int main()
 
                 for(int t=0;t<=max;t++){
                     if(all_solutions[smallest_sol_index][t]){
-                        printf("+ %d",tab[t]);
+                        printf("+ %d",donnees[t]);
                     }
                 }
                  printf(" = %d \n",searched_value);

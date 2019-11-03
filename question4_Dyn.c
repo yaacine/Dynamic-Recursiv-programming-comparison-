@@ -1,128 +1,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define true 1
-#define false 0
-
-#define max_sol 10
-
-#define len 9
-
-int max = len-1 ;
+// #define searched_value 69
+// #define cardinal 10
 
 
-int nb_sol = 0 ;
-
-int all_solutions [max_sol][len] ; // store 10 solutions max in a set of len elements
-
- int searched_value = 90 ;
-
-int tab[] = {3,5,6,8,7,2,4,59,69};
-int path[] = {0,0,0,0,0,0,0,0,0};
-
-int smallest_sol_index = -1 ;
-int smallest_sol_len = -1 ;
-
-//int solution[] = {0,0,0,0,0,0};
+int donnees[] = {3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,3,5,6,8,7,2,4,59,69,
+                  3,5,6,8,7,2,4,59,69,};
 
 
-//keep 10 solutions max
+int dynamic(int cardinal, int searched_value){
+    
+    int dyn_tab[cardinal+1][searched_value+1];
 
-
-int sub_sum_set(int n,int sum){
-
-
-    if((sum==0)){
-
-            int count =0 ;
-
-            for(int i=0;i<=max;i++){
-               // solution[i]=path[i];
-                all_solutions[nb_sol][i]=path[i];
-                // count nb elements involved
-                count = count + path[i]; // additionner 0+1+1 where involved
-            }
-
-                if(count>smallest_sol_len){
-
-                    smallest_sol_len = count ;
-                    smallest_sol_index = nb_sol ; // active solution
-                }
-
-
-            nb_sol++;
-
-
-        return true ;//need a push here
-
-
-    }
-    if(sum<0){
-        return false ;
-    }
-    if(n<=-1){
-
-        return false;
-    }
-    else{
-            int var1,var2; //separer permet de g�nerer tout les cas
-
-            path[n]=1;
-        var1=sub_sum_set(n-1,sum-tab[n]);
-                path[n]=0;
-            var2=sub_sum_set(n-1, sum);
-
-            return var1||var2 ;
-
-
-    }
-
-}
-
-
-
-int main()
-{
-
-
-    for(int i =0;i<max_sol;i++){
-        for(int j=0;j<=max;j++){
-
-            all_solutions[i][j] = 0 ;
+    int i=0;
+    int j=0;
+    // initialisation du tableau dynamique
+    for (i=0 ; i<cardinal+1 ;i++){
+        for(j=0; j<searched_value+1 ;j++){
+            if (j==0)dyn_tab[i][j] =0;
+            else dyn_tab[i][j] =-1;
         }
     }
 
-    int bool = sub_sum_set(max,searched_value);
 
-    printf("\n test : last element in tab* %d * \n",tab[5]);
+    // remplissage du tableau dynamique
 
-    if(bool){
-        printf("la valeur est trouve \n");
-            for(int y=0;y<nb_sol;y++){
-                for(int i=0;i<=max ;i++){
-                if(all_solutions[y][i]){
-                        printf("+ %d",tab[i]);
-                    }
+    int index1 =0;
+    int index2 =0;
+    int val1=0;
+    int val2=0;
+
+    for (i=1 ; i<cardinal+1 ;i++){
+        
+        for(j=1; j<searched_value+1 ;j++){
+            //dyn_tab[i,j] =-1;
+            index1 =j;
+            index2 = j-donnees[i]-1;
+            if(index1<0){
+                val1= -1; 
+            }
+            else{
+                val1 =dyn_tab[i-1][index1];
+
+
+            }
+
+            if(index2<0){
+                val2= -1; 
+            }
+            else{
+                val2 =dyn_tab[i-1][index2];
+
+
+            }
+
+
+            if(val1>=0 || val2>=0){
+                if(val1>val2){
+                    dyn_tab[i][j]= val1;
+                }else{
+                    dyn_tab[i][j]= val2+1;
                 }
-                    printf(" = %d \n",searched_value);
-
-                }
-
-                printf("\n \n the Biggest solution is : \n");
-
-                for(int t=0;t<=max;t++){
-                    if(all_solutions[smallest_sol_index][t]){
-                        printf("+ %d",tab[t]);
-                    }
-                }
-                 printf(" = %d \n",searched_value);
-
-
+            }
+        }
     }
-    else{
-        printf("la valeur n'est pas trouve \n");
-    }
+
+    printf("solution == %d \n" , dyn_tab[cardinal][searched_value]);
+
     return 0;
-}
 
-
+} 
