@@ -27,43 +27,42 @@ float resultats [3][10] ;
    int k=0;
 
 
-
    // test pour la merthode rec 
-    for(int k=0 ; k<10 ;k++ ){
-          struct timeval stop, start;
-          gettimeofday(&start, NULL);
+//     for(int k=0 ; k<10 ;k++ ){
+//           struct timeval stop, start;
+//           gettimeofday(&start, NULL);
            
 
-         // appel de la fonction recursive
-         int r = recursive((k+1)*10, searched_value);
-         resultats[0][k]=(double)(k+1)*10;
-        //  execRec =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
-        //  printf("Duration Rec MS %'.3f\n",execRec );
-         resultats[1][k]=execRec;      
-    }
 
+//          // appel de la fonction recursive
+//          int r = recursive((k+1)*10, searched_value);
+//          resultats[0][k]=(double)(k+1)*10;
+//         //  execRec =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
+//         //  printf("Duration Rec MS %'.3f\n",execRec );
+//          resultats[1][k]=execRec;      
+//     }
 
 
 //    // test pour dynamique  
-//      
-//       for( k=0 ;k<10 ;k++ ){
+     
+      for( k=0 ;k<10 ;k++ ){
          
-//           struct timeval stop, start;
+          struct timeval stop, start;
 
-//           // recuperation du tems de debut
-//           gettimeofday(&start, NULL);
-//           resultats[0][k]=(k+1)*10;
+          // recuperation du tems de debut
+          gettimeofday(&start, NULL);
+          resultats[0][k]=(k+1)*10;
             
-//          // appel de la fonct rec
-//           int r = dynamic((k+1)*10, searched_value);
+         // appel de la fonct rec
+          int r = dynamic((k+1)*10, searched_value);
 
-//           // recuperation du tems de debut
-//           gettimeofday(&stop, NULL);
+          // recuperation du tems de debut
+          gettimeofday(&stop, NULL);
 
-//           //calcul du temps d'execution
-//           execDyn =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
-//           resultats[2][k]=execDyn;
-//     }
+          //calcul du temps d'execution
+          execDyn =(double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
+          resultats[2][k]=execDyn;
+    }
 
 
       // print results table 
